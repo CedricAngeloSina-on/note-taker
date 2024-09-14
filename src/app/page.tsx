@@ -1,4 +1,15 @@
 import Link from "next/link";
+import { Book, Menu, StickyNote } from "lucide-react";
+
+import { Button } from "~/components/shadcn/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "~/components/shadcn/sheet";
+import { ThemeToggle } from "~/components/theme-toggle";
 
 import { getServerAuthSession } from "~/server/auth";
 import { HydrateClient } from "~/trpc/server";
@@ -8,50 +19,74 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <div className="flex flex-col items-center justify-center gap-4">
-              <p className="text-center text-2xl text-white">
-                {session && <span>Logged in as {session.user?.name}</span>}
-              </p>
-              <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-              >
-                {session ? "Sign out" : "Sign in"}
-              </Link>
+      <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+        <div className="hidden border-r bg-muted/40 md:block">
+          <div className="flex h-full max-h-screen flex-col gap-2">
+            <div className="flex h-14 items-center gap-2 border-b px-4 font-semibold lg:h-[60px] lg:px-6">
+              <Book className="size-6" />
+              <span>NoteTaker</span>
+            </div>
+            <div className="flex-1">
+              <nav className="grid items-start text-sm font-medium lg:px-4">
+                <span className="flex justify-between px-3 py-2 text-muted-foreground">
+                  <div className="flex items-center justify-between gap-3">
+                    <StickyNote className="size-4" />
+                    Topics
+                  </div>
+                </span>
+              </nav>
             </div>
           </div>
         </div>
-      </main>
+        <div className="flex flex-col">
+          <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="shrink-0 md:hidden"
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetTitle className="hidden">Mobile Menu</SheetTitle>
+              <SheetDescription className="hidden">
+                Mobile menu for NoteTaker.
+              </SheetDescription>
+              <SheetContent side="left" className="flex flex-col">
+                <nav className="grid gap-2 text-lg font-medium">
+                  <div className="flex items-center gap-2 text-lg font-semibold">
+                    <Book className="size-6" />
+                    <span>NoteTaker</span>
+                  </div>
+                  <span className="flex justify-between px-3 py-2 text-muted-foreground">
+                    <div className="flex items-center justify-between gap-3">
+                      <StickyNote className="size-4" />
+                      Topics
+                    </div>
+                  </span>
+                </nav>
+              </SheetContent>
+            </Sheet>
+            <div className="ml-auto flex items-center space-x-3">
+              <ThemeToggle />
+              <Link
+                href={session ? "/api/auth/signout" : "/api/auth/signin"}
+                className="flex items-center justify-center"
+              >
+                <Button className="w-full" variant="outline">
+                  {session ? "Sign out" : "Sign in with Discord"}
+                </Button>
+              </Link>
+            </div>
+          </header>
+          <main className="flex flex-1 flex-col items-center justify-center gap-4 p-4 lg:gap-6 lg:p-6">
+            {session ? <h1>Topics</h1> : <h1>Please Sign in</h1>}
+          </main>
+        </div>
+      </div>
     </HydrateClient>
   );
 }
