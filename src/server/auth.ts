@@ -14,7 +14,7 @@ import {
   sessions,
   users,
   verificationTokens,
-} from "~/server/db/schema";
+} from "~/server/db/schema/auth";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
