@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "~/components/shadcn/sheet";
 import { ThemeToggle } from "~/components/theme-toggle";
+import TopicDialog from "~/components/topic-dialog";
 
 import { getServerAuthSession } from "~/server/auth";
 import { HydrateClient } from "~/trpc/server";
@@ -33,6 +34,7 @@ export default async function Home() {
                     <StickyNote className="size-4" />
                     Topics
                   </div>
+                  <TopicDialog />
                 </span>
               </nav>
             </div>
@@ -66,6 +68,7 @@ export default async function Home() {
                       <StickyNote className="size-4" />
                       Topics
                     </div>
+                    <TopicDialog />
                   </span>
                 </nav>
               </SheetContent>
