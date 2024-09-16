@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Book, Menu, StickyNote } from "lucide-react";
 
 import { Button } from "~/components/shadcn/button";
+import Hero from "~/components/hero";
 import {
   Sheet,
   SheetContent,
@@ -95,7 +96,7 @@ export default async function Home() {
                 <TopicList />
               </div>
             ) : (
-              <h1>Please Sign in</h1>
+              <Hero />
             )}
           </main>
         </div>
