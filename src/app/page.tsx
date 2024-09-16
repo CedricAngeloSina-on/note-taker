@@ -11,12 +11,15 @@ import {
 } from "~/components/shadcn/sheet";
 import { ThemeToggle } from "~/components/theme-toggle";
 import TopicDialog from "~/components/topic-dialog";
+import TopicList from "~/components/topic-list";
 
 import { getServerAuthSession } from "~/server/auth";
-import { HydrateClient } from "~/trpc/server";
+import { api, HydrateClient } from "~/trpc/server";
 
 export default async function Home() {
   const session = await getServerAuthSession();
+
+  void api.topic.getTopics.prefetch();
 
   return (
     <HydrateClient>
@@ -86,7 +89,14 @@ export default async function Home() {
             </div>
           </header>
           <main className="flex flex-1 flex-col items-center justify-center gap-4 p-4 lg:gap-6 lg:p-6">
-            {session ? <h1>Topics</h1> : <h1>Please Sign in</h1>}
+            {session ? (
+              <div className="flex flex-col items-center justify-between text-5xl font-semibold">
+                <h1>TOPICS</h1>
+                <TopicList />
+              </div>
+            ) : (
+              <h1>Please Sign in</h1>
+            )}
           </main>
         </div>
       </div>
