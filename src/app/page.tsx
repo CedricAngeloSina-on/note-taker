@@ -20,7 +20,9 @@ import { api, HydrateClient } from "~/trpc/server";
 export default async function Home() {
   const session = await getServerAuthSession();
 
-  void api.topic.getTopics.prefetch();
+  if (session?.user) {
+    void api.topic.getTopics.prefetch();
+  }
 
   return (
     <HydrateClient>
