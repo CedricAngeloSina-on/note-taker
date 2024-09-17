@@ -5,9 +5,14 @@ export default function TopicList() {
   const [topics] = api.topic.getTopics.useSuspenseQuery();
 
   return (
-    <div className="flex flex-col items-center justify-between px-3 py-2 text-2xl text-muted-foreground">
+    <div className="flex flex-col justify-between px-3">
       {topics.map((topic) => (
-        <span key={topic.id}>{topic.title}</span>
+        <div
+          key={topic.id}
+          className="px-2 py-1 text-base text-muted-foreground transition-all hover:text-primary"
+        >
+          {topic.title}
+        </div>
       ))}
     </div>
   );

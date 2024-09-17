@@ -20,7 +20,7 @@ import { api, HydrateClient } from "~/trpc/server";
 export default async function Home() {
   const session = await getServerAuthSession();
 
-  if (session?.user) {
+  if (session) {
     void api.topic.getTopics.prefetch();
   }
 
@@ -33,17 +33,20 @@ export default async function Home() {
               <Book className="size-6" />
               <span>NoteTaker</span>
             </div>
-            <div className="flex-1">
-              <nav className="grid items-start text-sm font-medium lg:px-4">
-                <span className="flex justify-between px-3 py-2 text-muted-foreground">
-                  <div className="flex items-center justify-between gap-3">
-                    <StickyNote className="size-4" />
-                    Topics
-                  </div>
-                  <TopicDialog />
-                </span>
-              </nav>
-            </div>
+            {session?.user && (
+              <div className="flex-1">
+                <nav className="grid items-start text-lg font-medium lg:px-4">
+                  <span className="flex justify-between px-2 py-2 text-muted-foreground">
+                    <div className="flex items-center justify-between gap-x-1.5">
+                      <StickyNote className="size-5" />
+                      Topics
+                    </div>
+                    <TopicDialog />
+                  </span>
+                  <TopicList />
+                </nav>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex flex-col">
@@ -69,13 +72,18 @@ export default async function Home() {
                     <Book className="size-6" />
                     <span>NoteTaker</span>
                   </div>
-                  <span className="flex justify-between px-3 py-2 text-muted-foreground">
-                    <div className="flex items-center justify-between gap-3">
-                      <StickyNote className="size-4" />
-                      Topics
-                    </div>
-                    <TopicDialog />
-                  </span>
+                  {session?.user && (
+                    <>
+                      <span className="flex justify-between px-3 py-2 text-muted-foreground">
+                        <div className="flex items-center justify-between gap-3">
+                          <StickyNote className="size-4" />
+                          Topics
+                        </div>
+                        <TopicDialog />
+                      </span>
+                      <TopicList />
+                    </>
+                  )}
                 </nav>
               </SheetContent>
             </Sheet>
@@ -94,8 +102,7 @@ export default async function Home() {
           <main className="flex flex-1 flex-col items-center justify-center gap-4 p-4 lg:gap-6 lg:p-6">
             {session ? (
               <div className="flex flex-col items-center justify-between text-5xl font-semibold">
-                <h1>TOPICS</h1>
-                <TopicList />
+                <h1>NOTES</h1>
               </div>
             ) : (
               <Hero />
