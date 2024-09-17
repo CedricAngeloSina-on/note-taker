@@ -23,4 +23,10 @@ export const topicRouter = createTRPCRouter({
         userId: ctx.session.user.id,
       });
     }),
+
+  delete: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.delete(topics).where(eq(topics.id, input.id));
+    }),
 });
