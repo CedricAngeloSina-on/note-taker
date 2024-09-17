@@ -1,11 +1,17 @@
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { eq } from "drizzle-orm";
 import { topics } from "~/server/db/schema/topic";
 
 export const topicRouter = createTRPCRouter({
   getTopics: protectedProcedure.query(async ({ ctx }) => {
-    const topicsList = await ctx.db.select().from(topics).orderBy(topics.title);
+    const topicsList = await ctx.db
+      .select()
+      .from(topics)
+      .where(eq(topics.userId, ctx.session.user.id))
+      .orderBy(topics.title);
+
     return topicsList ?? null;
   }),
 
