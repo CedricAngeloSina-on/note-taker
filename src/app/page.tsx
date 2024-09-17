@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Book, Menu, StickyNote } from "lucide-react";
 
+import { AuthButton } from "~/components/auth-button";
 import { Button } from "~/components/shadcn/button";
 import Hero from "~/components/hero";
 import {
@@ -89,14 +89,7 @@ export default async function Home() {
             </Sheet>
             <div className="ml-auto flex items-center space-x-3">
               <ThemeToggle />
-              <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="flex items-center justify-center"
-              >
-                <Button className="w-full" variant="outline">
-                  {session ? "Sign out" : "Sign in with Discord"}
-                </Button>
-              </Link>
+              <AuthButton session={session} />
             </div>
           </header>
           <main className="flex flex-1 flex-col items-center justify-center gap-4 p-4 lg:gap-6 lg:p-6">
