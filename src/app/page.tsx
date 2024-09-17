@@ -2,7 +2,7 @@ import { Book, Menu, StickyNote } from "lucide-react";
 
 import { AuthButton } from "~/components/auth-button";
 import { Button } from "~/components/shadcn/button";
-import Hero from "~/components/hero";
+import { Hero } from "~/components/hero";
 import {
   Sheet,
   SheetContent,
@@ -11,8 +11,8 @@ import {
   SheetTrigger,
 } from "~/components/shadcn/sheet";
 import { ThemeToggle } from "~/components/theme-toggle";
-import TopicDialog from "~/components/topic-dialog";
-import TopicList from "~/components/topic-list";
+import { TopicDialog } from "~/components/topic-dialog";
+import { TopicList } from "~/components/topic-list";
 
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";

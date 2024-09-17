@@ -6,9 +6,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/shadcn/dialog";
-import TopicForm from "~/components//topic-form";
+import { TopicForm } from "~/components//topic-form";
 
-export default function TopicDialog() {
+export function TopicDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>

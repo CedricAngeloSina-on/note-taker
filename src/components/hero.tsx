@@ -1,4 +1,4 @@
-export default function Hero() {
+export function Hero() {
   return (
     <div className="mx-auto gap-6 text-center">
       <div className="my-4">

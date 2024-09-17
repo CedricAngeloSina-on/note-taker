@@ -25,7 +25,7 @@ const formSchema = z.object({
     .max(50, { message: "Topic title must be at most 50 characters." }),
 });
 
-export default function TopicForm() {
+export function TopicForm() {
   const utils = api.useUtils();
 
   const createTopic = api.topic.create.useMutation({

@@ -14,7 +14,7 @@ import {
 
 import { api } from "~/trpc/react";
 
-export default function TopicList() {
+export function TopicList() {
   const utils = api.useUtils();
 
   const [topics] = api.topic.getTopics.useSuspenseQuery();
