@@ -15,5 +15,5 @@ export const notes = createTable("note", {
   content: text("content"),
   topicId: integer("topic_id")
     .notNull()
-    .references(() => topics.id),
+    .references(() => topics.id, { onDelete: "cascade" }),
 });
