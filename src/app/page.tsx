@@ -14,11 +14,11 @@ import { ThemeToggle } from "~/components/theme-toggle";
 import TopicDialog from "~/components/topic-dialog";
 import TopicList from "~/components/topic-list";
 
-import { getServerAuthSession } from "~/server/auth";
+import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 
 export default async function Home() {
-  const session = await getServerAuthSession();
+  const session = await auth();
 
   if (session) {
     void api.topic.getTopics.prefetch();
