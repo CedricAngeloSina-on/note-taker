@@ -18,7 +18,7 @@ export default async function Home() {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center gap-2 border-b px-4 font-semibold lg:h-[60px] lg:px-6">
             <Book className="size-6" />
-            <span>iCare</span>
+            <span>ICARE</span>
           </div>
           {/* {session?.user && (
               <div className="flex-1">
@@ -51,13 +51,13 @@ export default async function Home() {
             </SheetTrigger>
             <SheetTitle className="hidden">Mobile Menu</SheetTitle>
             <SheetDescription className="hidden">
-              Mobile menu for iCare.
+              Mobile menu for ICARE.
             </SheetDescription>
             <SheetContent side="left" className="flex flex-col">
               <nav className="grid gap-2 text-lg font-medium">
                 <div className="flex items-center gap-2 text-lg font-semibold">
                   <Book className="size-6" />
-                  <span>iCare</span>
+                  <span>ICARE</span>
                 </div>
                 {/* {session?.user && (
                     <>

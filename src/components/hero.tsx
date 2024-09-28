@@ -49,7 +49,7 @@ export function Hero() {
       <div className="mx-auto gap-6 text-center">
         <div className="my-4">
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            iCare
+            ICARE
           </h1>
           <p className="text-balance text-2xl text-muted-foreground">
             your immediate response.
