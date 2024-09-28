@@ -67,10 +67,8 @@ export function TopicForm() {
           name="topic"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Topic Title</FormLabel>
-              <FormDescription>
-                A subject that you want to take down notes.
-              </FormDescription>
+              <FormLabel>Message</FormLabel>
+              <FormDescription>These alerts will inform people</FormDescription>
               <FormControl>
                 <Input {...field} />
               </FormControl>
